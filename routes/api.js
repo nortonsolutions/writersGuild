@@ -1,6 +1,6 @@
 /*
-* Norton 2025 - Quizzap!
-*
+* Norton 2025 - Writer's Guild Platform
+* Main API Routes
 */
 
 'use strict';

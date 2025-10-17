@@ -1,5 +1,7 @@
 /**
- * Norton 2025 - Quizzap! App
+ * Norton 2025 - Writer's Guild Platform
+ * A platform for writers and creators to publish, collaborate, and receive feedback
+ * through discussion rooms (IGNFTs). Features books, chapters, and various module types.
  */
 
 'use strict';
