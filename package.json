@@ -1,7 +1,7 @@
 {
-  "name": "courseapp",
-  "version": "1.0.0",
-  "description": "courseApp for online courses with modules, messageboards, timed tests, MathJax, etc.",
+  "name": "writersguild",
+  "version": "2.0.0",
+  "description": "Writer's Guild - A platform for writers and creators to publish, collaborate, and receive feedback through discussion rooms (IGNFTs). Features books, chapters, and various module types for creative content.",
   "main": "server.js",
   "directories": {
     "test": "tests"

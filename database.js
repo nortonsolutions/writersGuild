@@ -1,15 +1,17 @@
 /**
  * Database strategy - Norton 2025
  * Based on Mongoose.
+ * Writers Guild Platform - Books, Authors, Modules, Discussion Rooms
  */
 const dotenv = require('dotenv');
 dotenv.config({ path: './.env'});
 
 module.exports = function (mongoose, callback) {
 
-    const CONNECTION_STRING = process.env.DB || "mongodb://localhost:27017/CourseApp";
+    const CONNECTION_STRING = process.env.DB || "mongodb://localhost:27017/WritersGuild";
 
-    const quizQuestionSchema = mongoose.Schema({
+    // Module content schema - supports various types (Chapter, Instructional, Project, etc.)
+    const moduleQuestionSchema = mongoose.Schema({
       type: { type: String, required: true, default: 'single' },
       question: { type: String, required: true },
       choices: [{
@@ -23,16 +25,17 @@ module.exports = function (mongoose, callback) {
     })
 
 
-    const quizSchema = mongoose.Schema({
+    const moduleSchema = mongoose.Schema({
       name: { type: String },
-      questions: {type: [quizQuestionSchema], default: []},
+      moduleType: { type: String, default: 'chapter' }, // chapter, instructional, project, quiz
+      questions: {type: [moduleQuestionSchema], default: []},
       description: String,
       timeLimit: Number,
       maxAttempts: Number,
       minPassingGrade: Number
     })
 
-    const QuizModel = mongoose.model('Quiz', quizSchema);
+    const QuizModel = mongoose.model('Quiz', moduleSchema);
 
     // const userQuizQuestionSchema = mongoose.Schema({
     //   questionId: { type: String, required: true },
@@ -56,7 +59,7 @@ module.exports = function (mongoose, callback) {
     const userSchema = mongoose.Schema({
       username: { type: String, required: true, unique: true },
       password: { type: String, required: true },
-      roles: {type: [String], default: ['student']},
+      roles: {type: [String], default: ['student']}, // 'student', 'author', 'admin'
       quizzes: {type: [userQuizSchema], default: []},
       projects: [{
         courseId: String,
@@ -80,32 +83,35 @@ module.exports = function (mongoose, callback) {
     const ReplyModel = mongoose.model('Reply', replySchema);
 
     const threadSchema = mongoose.Schema({
-      courseId: { type: String, required: true }, 
+      courseId: { type: String, required: true }, // references Book (bookId)
       text: { type: String, required: true },
       created_on: Date,
       bumped_on: Date,
       status: String,
       author: { type: String, required: true },
       reported: { type: Boolean, default: false },
-      replies: {type: [replySchema], default: []}
+      replies: {type: [replySchema], default: []},
+      ignftId: String, // IGNFT identifier for blockchain/chaining
+      ignftMetadata: Object // IGNFT metadata for morphous standard
     })
 
     const ThreadModel = mongoose.model('Thread', threadSchema);
 
     const courseSchema = mongoose.Schema({
-      name: { type: String, required: true, unique: true },
+      name: { type: String, required: true, unique: true }, // Book title
       homeContent: String,
       description: String,
-      instructors: [{
+      instructors: [{ // Authors of the book
         instructorId: String,
         instructorName: String
       }],
-      studentIds: [String],
-      quizIds: [{
+      studentIds: [String], // Readers/collaborators
+      quizIds: [{ // Modules (chapters, etc.)
         quizId: String,
         sortKey: Number
       }],
-      currentTermStartDate: Date
+      currentTermStartDate: Date,
+      ignftEnabled: { type: Boolean, default: true } // IGNFT support for discussion rooms
     })
 
     const CourseModel = mongoose.model('Course', courseSchema);

@@ -1,4 +1,4 @@
-## Quizzap!
+## Writer's Guild Platform
 
 #### Copyright Norton 2025
 
@@ -6,50 +6,103 @@
 <img src="courseApp_2.png" width="400"/>
 <img src="courseApp_3.png" width="400"/>
 
-Claude 3.7 summarized the application as follows:
+### Platform Overview
 
-The legacy JavaScript application (Quizzap!) is a course management platform built with:
+**Writer's Guild** is an innovative platform designed for writers and creators to publish, collaborate, and receive feedback on their work. Originally evolved from a course-delivery system (Quizzap!), it has been transformed into a dynamic platform for creative content where authors can:
 
-* **Backend** : Node.js with Express
-* **Database** : MongoDB with Mongoose ODM
-* **Authentication** : Passport.js with local strategy
-* **View Engine** : Handlebars (HBS)
-* **UI Framework** : Bootstrap with jQuery
+- **Publish Books**: Organize writing projects as "Books" with multiple modules
+- **Create Chapters**: Utilize the Chapter module type alongside other content types
+- **Facilitate Discussion**: Each module can have its own discussion room for feedback and editing
+- **IGNFT Integration**: Discussion rooms are implemented as IGNFTs (Interoperable Generative NFTs), enabling a living, morphous standard where content can be blocked and chained
 
-The key functionalities include:
+### Key Concepts
 
-1. **User Authentication**
+#### Terminology Mapping
+- **Authors** (formerly Teachers): Content creators who publish books
+- **Books** (formerly Courses): Publishing projects containing modules
+- **Modules**: Various content types including:
+  - **Chapter Modules**: Traditional book chapters for narrative content
+  - **Instructional Modules**: Educational or tutorial content
+  - **Project Modules**: Submission-based modules for creative work
+  - **Quiz Modules**: Assessment and feedback modules
+- **Discussion Rooms**: Per-module feedback and collaboration spaces
+- **Readers/Collaborators** (formerly Students): Community members engaging with content
+
+#### IGNFT (Interoperable Generative NFT)
+Each discussion room is an IGNFT, creating a living, morphous ecosystem where:
+- Content can be uniquely identified and tracked
+- Discussions can be blocked and chained for versioning
+- Creative work maintains provenance and attribution
+- Community feedback becomes part of the creative artifact
+
+### Technical Stack
+
+The platform is built with:
+
+* **Backend**: Node.js with Express
+* **Database**: MongoDB with Mongoose ODM
+* **Authentication**: Passport.js with local strategy
+* **View Engine**: Handlebars (HBS)
+* **UI Framework**: Bootstrap with jQuery
+
+### Core Features
+
+1. **User Authentication & Roles**
    * Login/register system
-   * Role-based access (student, teacher, admin)
-2. **Course Management**
-   * Creating and managing courses
-   * Assigning instructors to courses
-   * Student enrollment
-3. **Quiz System**
-   * Creating/editing quizzes with multiple question types
-   * Quiz attempts tracking
-   * Timer functionality
-   * Grading system with pass/fail criteria
-   * Project submissions
-4. **Discussion Forums**
-   * Thread creation by course
-   * Replies with upvoting/downvoting
+   * Role-based access (reader, author, admin)
+   
+2. **Book Management**
+   * Creating and managing books
+   * Assigning authors to books
+   * Reader enrollment and collaboration
+
+3. **Module System**
+   * Multiple module types (Chapter, Instructional, Project, Quiz)
+   * Module creation and editing
+   * Timer functionality for timed modules
+   * Submission tracking for project modules
+   * Grading and feedback mechanisms
+
+4. **Discussion Rooms (IGNFT-enabled)**
+   * Thread creation per module/chapter
+   * Replies with community engagement (upvoting/downvoting)
    * Moderation features
-5. **Learning Content**
-   * Course materials organized in modules
+   * IGNFT metadata for blockchain integration
+
+5. **Content Organization**
+   * Modules organized within books
    * Media support (images, videos)
+   * Rich text editing capabilities
 
 -----
 
+### Setup and Configuration
+
 This version assumes MongoDB is up and running on port 27017
-and uses the DB called "CourseApp" (wiredtiger) by default.
+and uses the DB called "WritersGuild" (wiredtiger) by default.
 
 Extract cdn.zip in current folder to create /cdn directory.
 
-Versioning:
+### Versioning:
 
-- 1.0.0: (2021) Initial version
-- 1.0.1: (May 2024) Updated this readme.  :)
+- 1.0.0: (2021) Initial version as Quizzap!
+- 1.0.1: (May 2024) Updated readme
+- 2.0.0: (October 2025) **Transformed to Writer's Guild Platform**
+  - Teacher → Author role
+  - Course → Book concept
+  - Module types expanded (Chapter, Instructional, Project, Quiz)
+  - IGNFT integration for discussion rooms
+  - Platform repositioned for writers and creators
+
+---
+
+### Migration Notes
+
+For existing Quizzap! installations migrating to Writer's Guild:
+- The database connection string defaults to "WritersGuild" but can be configured via environment variables
+- User roles: 'teacher' role is now 'author' (backward compatible)
+- Course data structures are now called "Books" in documentation but maintain database compatibility
+- Discussion rooms now support IGNFT metadata fields for blockchain integration
 
 ---
 
@@ -87,11 +140,11 @@ $ pm2 save
 
 Manual startup of the production server:
 
-Assuming the MongoDB process is running, start Quizzap! with:
+Assuming the MongoDB process is running, start Writer's Guild with:
 
-pm2 start courseApp
+pm2 start writersGuild
 
-... which essentially runs "node /c/util/courseApp/server.js" in daemon mode.
+... which essentially runs "node /c/util/writersGuild/server.js" in daemon mode.
 
 ---
 

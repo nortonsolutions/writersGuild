@@ -1,7 +1,10 @@
 /*
-* Norton 2025 - Quizzap!
-*
+* Norton 2025 - Writer's Guild Platform
+* Discussion Room API Routes (IGNFT-enabled message boards)
 */
+
+// Discussion Rooms are IGNFT-enabled, allowing content to be blocked and chained
+// Each room provides feedback and collaboration space for modules/chapters
 
 // const replySchema = mongoose.Schema({
 //     text: { type: String, required: true },

@@ -1,6 +1,6 @@
 /*
-* Norton 2025 - Quizzap!
-*
+* Norton 2025 - Writer's Guild Platform
+* Book API Routes (formerly Course)
 */
 
 'use strict';
@@ -25,12 +25,12 @@ module.exports = function (app, db) {
         }     
     };
 
-    // ensureAdminOrTeacher
+    // ensureAdminOrAuthor - allows admin or book authors to access
     const ensureAdminOrTeacher = (req, res, next) => {
         if (req.user.roles.includes('admin')) {
             next();
         } else {
-            if (req.user.roles.includes('teacher')) {
+            if (req.user.roles.includes('teacher') || req.user.roles.includes('author')) {
                 let courseId = req.params.courseId;
                 
                 db.models.Course.findOne()
@@ -38,6 +38,7 @@ module.exports = function (app, db) {
                     .exec((err, course) => {
                         if (course) {
                         req.user.currentTeacher = true;
+                        req.user.currentAuthor = true;
                         next();
                         }
                     })
