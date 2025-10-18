@@ -96,7 +96,7 @@ database(mongoose, (db) => {
   
   app.use('/', express.static(__dirname));
   app.use('/public', express.static(__dirname + '/public'));
-  app.use('/cdn', express.static(__dirname + '/cdn'));
+  app.use('https://redrockcode.com/cdn', express.static(__dirname + 'https://redrockcode.com/cdn'));
   app.use('/viewScripts', express.static(__dirname + '/viewScripts'));
   
   app.use(cors({origin: '*'})); //For FCC testing purposes only
